@@ -27,7 +27,7 @@ namespace CmsWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ICmsRepository, InMemoryCmsRepository>();
+            services.AddSingleton<ICmsRepository, InMemoryCmsRepository>(); // <-- enables dependency injection
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
