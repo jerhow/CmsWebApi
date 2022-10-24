@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+Ax9M67OHIOSnXTQVAr5AJ5FqB+m/38CB571xRbGuLPhWNEQ+4i+LUp8DVD06VQnBp+r84uUb1SCeZUgmA6k/g==",
+  "dgSpecHash": "voQh6+mygyN/GuhPJgpC2+9GdwusV8rSZvlQ0R/fCXiZ48syg2M9+NIWM0IcUN/CFnGtnAxlKnREewtxDuzW6A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ghoward\\source\\repos\\CmsWebApi\\CmsWebApi.csproj",
+  "projectFilePath": "C:\\Users\\ghoward\\source\\repos\\CmsWebApi\\Cms.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ghoward\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\ghoward\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

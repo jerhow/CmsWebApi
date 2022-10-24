@@ -214,9 +214,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ghoward\\source\\repos\\CmsWebApi\\CmsWebApi.csproj",
-      "projectName": "CmsWebApi",
-      "projectPath": "C:\\Users\\ghoward\\source\\repos\\CmsWebApi\\CmsWebApi.csproj",
+      "projectUniqueName": "C:\\Users\\ghoward\\source\\repos\\CmsWebApi\\Cms.WebApi.csproj",
+      "projectName": "Cms.WebApi",
+      "projectPath": "C:\\Users\\ghoward\\source\\repos\\CmsWebApi\\Cms.WebApi.csproj",
       "packagesPath": "C:\\Users\\ghoward\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\ghoward\\source\\repos\\CmsWebApi\\obj\\",
       "projectStyle": "PackageReference",
