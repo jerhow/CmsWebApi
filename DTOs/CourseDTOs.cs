@@ -1,4 +1,5 @@
 ﻿using Cms.Data.Repository.Models;
+using System.Text.Json.Serialization;
 
 namespace Cms.WebApi.DTOs
 {
@@ -10,6 +11,7 @@ namespace Cms.WebApi.DTOs
 
         public int CourseDuration { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))] // You need this attribute to convert strings to enum values
         public COURSE_TYPE CourseType { get; set; }
 
     }

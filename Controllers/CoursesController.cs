@@ -99,6 +99,21 @@ namespace Cms.WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult<CourseDTO> AddCourse([FromBody]CourseDTO course) // [FromBody] states that we expect the input for this DTO/model to be in the body of the HTTP request
+        {
+            try
+            {
+                var newCourse = mapper.Map<Course>(course);
+                newCourse = cmsRepository.AddCourse(newCourse);
+                return mapper.Map<CourseDTO>(newCourse); // Remember, we need to map this model back to a DTO to return to the client
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         #region Custom mapper methods
         //private CourseDTO MapCourseToCourseDTO(Course course)
         //{

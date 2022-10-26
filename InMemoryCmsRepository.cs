@@ -39,6 +39,15 @@ namespace Cms.Data.Repository.Repositories
             return courses;
         }
 
+        public Course AddCourse(Course newCourse)
+        {
+            var maxCourseId = courses.Max(c => c.CourseId);
+            newCourse.CourseId = maxCourseId + 1;
+            courses.Add(newCourse);
+
+            return newCourse;
+        }
+
         public async Task<IEnumerable<Course>> GetAllCoursesAsync()
         {
             return await Task.Run(() => courses.ToList());
