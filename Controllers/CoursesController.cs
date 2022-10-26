@@ -1,6 +1,7 @@
 ﻿using Cms.Data.Repository.Models;
 using Cms.Data.Repository.Repositories;
 using Cms.WebApi.DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace Cms.WebApi.Controllers
             this.cmsRepository = cmsRepository;
         }
 
+        // *** Return type - Approach 1 - primitive or complex type ***
         // Approach 1: Before implementing our model as a DTO (Data Transfer Object),
         // which is the preferred way to expose data in a segregated manner (DTOs are
         // preferred for client-facing, and data models are considered to be used internally
@@ -28,18 +30,35 @@ namespace Cms.WebApi.Controllers
         //    return cmsRepository.GetAllCourses();
         //}
 
+        // *** Return type - Approach 1 - primitive or complex type ***
+        //[HttpGet]
+        //public IEnumerable<CourseDTO> GetCourses()
+        //{
+        //    try
+        //    {
+        //        IEnumerable<Course> courses = cmsRepository.GetAllCourses();
+        //        var result = MapCourseToCourseDTO(courses);
+        //        return result;
+        //    }
+        //    catch (System.Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        // *** Return type - Approach 2 - IActionResult  ***
         [HttpGet]
-        public IEnumerable<CourseDTO> GetCourses()
+        public IActionResult GetCourses()
         {
             try
             {
                 IEnumerable<Course> courses = cmsRepository.GetAllCourses();
                 var result = MapCourseToCourseDTO(courses);
-                return result;
+                return Ok(result);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
