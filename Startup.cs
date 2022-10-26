@@ -1,4 +1,5 @@
 using Cms.Data.Repository.Repositories;
+using Cms.WebApi.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +28,8 @@ namespace CmsWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ICmsRepository, InMemoryCmsRepository>(); // <-- enables dependency injection
+            services.AddSingleton<ICmsRepository, InMemoryCmsRepository>(); // <-- enables dependency injection of repository
+            services.AddAutoMapper(typeof(CmsMapper));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

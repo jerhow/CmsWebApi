@@ -1,4 +1,5 @@
-﻿using Cms.Data.Repository.Models;
+﻿using AutoMapper;
+using Cms.Data.Repository.Models;
 using Cms.Data.Repository.Repositories;
 using Cms.WebApi.DTOs;
 using Microsoft.AspNetCore.Http;
@@ -14,10 +15,12 @@ namespace Cms.WebApi.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly ICmsRepository cmsRepository;
+        private IMapper mapper;
 
-        public CoursesController(ICmsRepository cmsRepository) // <-- dependency injection
+        public CoursesController(ICmsRepository cmsRepository, IMapper mapper) // <-- DI (making dependencies available to the controllers via the constructor)
         {
             this.cmsRepository = cmsRepository;
+            this.mapper = mapper;
         }
 
         // *** Return type - Approach 1 - primitive or complex type ***
@@ -86,7 +89,8 @@ namespace Cms.WebApi.Controllers
             try
             {
                 IEnumerable<Course> courses = await cmsRepository.GetAllCoursesAsync();
-                var result = MapCourseToCourseDTO(courses);
+                // var result = MapCourseToCourseDTO(courses); // Now we will use the AutoMapper instead (next line)
+                var result = mapper.Map<CourseDTO[]>(courses); // This replaces the need for our custom mapping methods
                 return result.ToList(); // Convert to support ActionResult<T>
             }
             catch (System.Exception ex)
@@ -95,30 +99,31 @@ namespace Cms.WebApi.Controllers
             }
         }
 
-        // Custom mapper functions
-        private CourseDTO MapCourseToCourseDTO(Course course)
-        {
-            return new CourseDTO()
-            {
-                CourseId = course.CourseId,
-                CourseName = course.CourseName,
-                CourseDuration = course.CourseDuration,
-                CourseType = (Cms.WebApi.DTOs.COURSE_TYPE)course.CourseType
-            };
-        }
+        #region Custom mapper methods
+        //private CourseDTO MapCourseToCourseDTO(Course course)
+        //{
+        //    return new CourseDTO()
+        //    {
+        //        CourseId = course.CourseId,
+        //        CourseName = course.CourseName,
+        //        CourseDuration = course.CourseDuration,
+        //        CourseType = (Cms.WebApi.DTOs.COURSE_TYPE)course.CourseType
+        //    };
+        //}
 
-        private IEnumerable<CourseDTO> MapCourseToCourseDTO(IEnumerable<Course> courses)
-        {
-            IEnumerable<CourseDTO> result;
-            result = courses.Select(c => new CourseDTO()
-            {
-                CourseId = c.CourseId,
-                CourseName = c.CourseName,
-                CourseDuration = c.CourseDuration,
-                CourseType = (Cms.WebApi.DTOs.COURSE_TYPE)c.CourseType
-            });
+        //private IEnumerable<CourseDTO> MapCourseToCourseDTO(IEnumerable<Course> courses)
+        //{
+        //    IEnumerable<CourseDTO> result;
+        //    result = courses.Select(c => new CourseDTO()
+        //    {
+        //        CourseId = c.CourseId,
+        //        CourseName = c.CourseName,
+        //        CourseDuration = c.CourseDuration,
+        //        CourseType = (Cms.WebApi.DTOs.COURSE_TYPE)c.CourseType
+        //    });
 
-            return result;
-        }
+        //    return result;
+        //}
+        #endregion Custom mapper methods
     }
 }
