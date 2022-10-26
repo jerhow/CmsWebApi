@@ -48,13 +48,29 @@ namespace Cms.WebApi.Controllers
 
         // *** Return type - Approach 2 - IActionResult  ***
         [HttpGet]
-        public IActionResult GetCourses()
+        //public IActionResult GetCourses()
+        //{
+        //    try
+        //    {
+        //        IEnumerable<Course> courses = cmsRepository.GetAllCourses();
+        //        var result = MapCourseToCourseDTO(courses);
+        //        return Ok(result);
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        //    }
+        //}
+
+        // *** Return type - Approach 3 - ActionResult<T>  ***
+        [HttpGet]
+        public ActionResult<IEnumerable<CourseDTO>> GetCourses()
         {
             try
             {
                 IEnumerable<Course> courses = cmsRepository.GetAllCourses();
                 var result = MapCourseToCourseDTO(courses);
-                return Ok(result);
+                return result.ToList(); // Convert to support ActionResult<T>
             }
             catch (System.Exception ex)
             {
