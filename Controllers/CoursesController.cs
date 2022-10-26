@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cms.WebApi.Controllers
 {
@@ -63,12 +64,28 @@ namespace Cms.WebApi.Controllers
         //}
 
         // *** Return type - Approach 3 - ActionResult<T>  ***
+        //[HttpGet]
+        //public ActionResult<IEnumerable<CourseDTO>> GetCourses()
+        //{
+        //    try
+        //    {
+        //        IEnumerable<Course> courses = cmsRepository.GetAllCourses();
+        //        var result = MapCourseToCourseDTO(courses);
+        //        return result.ToList(); // Convert to support ActionResult<T>
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        //    }
+        //}
+
+        // ***  ***
         [HttpGet]
-        public ActionResult<IEnumerable<CourseDTO>> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseDTO>>> GetCoursesAsync()
         {
             try
             {
-                IEnumerable<Course> courses = cmsRepository.GetAllCourses();
+                IEnumerable<Course> courses = await cmsRepository.GetAllCoursesAsync();
                 var result = MapCourseToCourseDTO(courses);
                 return result.ToList(); // Convert to support ActionResult<T>
             }

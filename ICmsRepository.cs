@@ -1,11 +1,14 @@
 using Cms.Data.Repository.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cms.Data.Repository.Repositories
 {
     public interface ICmsRepository
     {
         IEnumerable<Course> GetAllCourses();
+        
+        Task<IEnumerable<Course>> GetAllCoursesAsync();
     }
 }
 

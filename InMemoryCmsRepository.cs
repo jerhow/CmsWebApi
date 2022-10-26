@@ -1,5 +1,7 @@
 using Cms.Data.Repository.Models;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cms.Data.Repository.Repositories
 {
@@ -35,6 +37,11 @@ namespace Cms.Data.Repository.Repositories
         public IEnumerable<Course> GetAllCourses()
         {
             return courses;
+        }
+
+        public async Task<IEnumerable<Course>> GetAllCoursesAsync()
+        {
+            return await Task.Run(() => courses.ToList());
         }
     }
 }
