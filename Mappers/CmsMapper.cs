@@ -18,6 +18,8 @@ namespace Cms.WebApi.Mappers
             CreateMap<CourseDTO, Course>()
                 .ReverseMap();
 
+            CreateMap<StudentDTO, Student>()
+                .ReverseMap();
         }
     }
 }

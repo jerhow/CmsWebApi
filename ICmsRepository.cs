@@ -19,6 +19,8 @@ namespace Cms.Data.Repository.Repositories
         Course UpdateCourse(int courseId, Course updatedCourse);
 
         Course DeleteCourse(int courseId);
+
+        // Association APIs
+        IEnumerable<Student> GetStudents(int courseId);
     }
 }
-

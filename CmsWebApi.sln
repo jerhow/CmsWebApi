@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{0F273EAE-8E1B-4F4E-A2F6-491E8E719940}"
 	ProjectSection(SolutionItems) = preProject
 		Course.cs = Course.cs
+		Student.cs = Student.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{455165AA-D616-4935-8059-25362A989A2B}"
