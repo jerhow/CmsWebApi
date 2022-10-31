@@ -75,6 +75,19 @@ namespace Cms.Data.Repository.Repositories
             return course;
         }
 
+        public Course DeleteCourse(int courseId)
+        {
+            var course = courses.Where(c => c.CourseId == courseId)
+                                .SingleOrDefault();
+
+            if (course != null)
+            {
+                courses.Remove(course);
+            }
+            
+            return course;
+        }
+
         public async Task<IEnumerable<Course>> GetAllCoursesAsync()
         {
             return await Task.Run(() => courses.ToList());
