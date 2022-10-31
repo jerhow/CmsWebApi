@@ -202,6 +202,34 @@ namespace Cms.WebApi.Controllers
             }
         }
 
+        // POST ../courses/1/students
+        [HttpPost("{courseId}/students")]
+        public ActionResult<StudentDTO> AddStudent(int courseId, StudentDTO student)
+        {
+            try
+            {
+                if (!cmsRepository.CourseExists(courseId))
+                {
+                    return NotFound();
+                }
+
+                Student newStudent = mapper.Map<Student>(student); // convert from DTO to model
+
+                // Fetch the course in question and associate it with the student model
+                Course course = cmsRepository.GetCourse(courseId);
+                newStudent.Course = course;
+
+                newStudent = cmsRepository.AddStudent(newStudent); // add new student to the data repository
+                var result = mapper.Map<StudentDTO>(newStudent); // convert updated model back to a DTO that can be sent back to the client
+
+                return StatusCode(StatusCodes.Status201Created, result);
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         #region Custom mapper methods
         //private CourseDTO MapCourseToCourseDTO(Course course)
         //{

@@ -22,5 +22,7 @@ namespace Cms.Data.Repository.Repositories
 
         // Association APIs
         IEnumerable<Student> GetStudents(int courseId);
+
+        Student AddStudent(Student newStudent);
     }
 }
