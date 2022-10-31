@@ -114,6 +114,26 @@ namespace Cms.WebApi.Controllers
             }
         }
 
+        [HttpGet("{courseId}")]
+        public ActionResult<CourseDTO> GetCourse(int courseId)
+        {
+            try
+            {
+                if (!cmsRepository.CourseExists(courseId))
+                {
+                    return NotFound();
+                }
+
+                Course course = cmsRepository.GetCourse(courseId);
+                var result = mapper.Map<CourseDTO>(course);
+                return result;
+            }
+            catch(System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         #region Custom mapper methods
         //private CourseDTO MapCourseToCourseDTO(Course course)
         //{

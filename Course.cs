@@ -1,6 +1,4 @@
-﻿//using System;
-
-namespace Cms.Data.Repository.Models
+﻿namespace Cms.Data.Repository.Models
 {
     public class Course
     {
