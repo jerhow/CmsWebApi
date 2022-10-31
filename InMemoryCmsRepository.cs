@@ -60,6 +60,21 @@ namespace Cms.Data.Repository.Repositories
             return result;
         }
 
+        public Course UpdateCourse(int courseId, Course updatedCourse)
+        {
+            var course = courses.Where(c => c.CourseId == courseId)
+                                .SingleOrDefault();
+
+            if(course != null)
+            {
+                course.CourseName = updatedCourse.CourseName;
+                course.CourseDuration = updatedCourse.CourseDuration;
+                course.CourseType = updatedCourse.CourseType;
+            }
+
+            return course;
+        }
+
         public async Task<IEnumerable<Course>> GetAllCoursesAsync()
         {
             return await Task.Run(() => courses.ToList());

@@ -134,6 +134,27 @@ namespace Cms.WebApi.Controllers
             }
         }
 
+        [HttpPut("{courseId}")]
+        public ActionResult<CourseDTO> UpdateCourse(int courseId, CourseDTO course)
+        {
+            try
+            {
+                if (!cmsRepository.CourseExists(courseId))
+                {
+                    return NotFound();
+                }
+
+                Course updatedCourse = mapper.Map<Course>(course); // convert from DTO to model
+                updatedCourse = cmsRepository.UpdateCourse(courseId, updatedCourse); // update course in the data repository
+                var result = mapper.Map<CourseDTO>(updatedCourse); // convert updated model back to a DTO that can be sent back to the client
+                return result;
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         #region Custom mapper methods
         //private CourseDTO MapCourseToCourseDTO(Course course)
         //{
